@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import vn.edu.hcmuaf.fit.demohello.dto.request.AddressDTO;
@@ -214,6 +215,29 @@ public class UserServiceImpl implements UserService {
                         .addressType(a.getAddressType())
                         .build()));
         return result;
+    }
+    @Override
+    public PageResponse<?> advanceSearchBySpecification(Pageable pageable, String[] user, String[] address) {
+        Page<User> users = null;
+        List<User> list = new ArrayList<>();
+        if(user != null && address != null) {
+            // tim kiem tren user va address -> join table
+        } else if(user != null && address == null) {
+            // tim kiem tren bang user khong can join sang bang address
+
+            Specification<User> spec = Specification.where((root, query, criteriaBuilder) -> criteriaBuilder.like(
+                    root.get("firstName"), "%T%"));
+
+            list = userRepository.findAll(spec);
+        } else {
+            users = userRepository.findAll(pageable);
+        }
+        return PageResponse.builder()
+                .pageNo(pageable.getPageNumber())
+                .pageSize(pageable.getPageSize())
+                .totalPage(10)
+                .items(list)
+                .build();
     }
 
 }

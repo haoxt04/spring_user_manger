@@ -1,5 +1,6 @@
 package vn.edu.hcmuaf.fit.demohello.service;
 
+import org.springframework.data.domain.Pageable;
 import vn.edu.hcmuaf.fit.demohello.dto.request.UserRequestDTO;
 import vn.edu.hcmuaf.fit.demohello.dto.response.PageResponse;
 import vn.edu.hcmuaf.fit.demohello.dto.response.UserDetailResponse;
@@ -25,4 +26,6 @@ public interface UserService {
     PageResponse<?> getAllUsersWithSortByColumnsAndSearch(int pageNo, int pageSize, String search, String sortBy);
 
     PageResponse<?> advanceSearchByCriteria(int pageNo, int pageSize, String sortBy, String address, String... search);
+
+    PageResponse<?> advanceSearchBySpecification(Pageable pageable, String[] user, String[] address);
 }
