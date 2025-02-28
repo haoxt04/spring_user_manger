@@ -7,7 +7,6 @@ import org.hibernate.type.SqlTypes;
 import vn.edu.hcmuaf.fit.demohello.utils.Gender;
 import vn.edu.hcmuaf.fit.demohello.utils.UserStatus;
 import vn.edu.hcmuaf.fit.demohello.utils.UserType;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
