@@ -17,9 +17,9 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "User")
+@Entity
 @Table(name = "tbl_user")
-public class User extends AbstractEntity {
+public class User extends AbstractEntity<Long> {
     @Column(name = "first_name")
     private String firstName;
 
@@ -70,4 +70,7 @@ public class User extends AbstractEntity {
             address.setUser(this); // save user_id
         }
     }
+
+    @OneToMany(mappedBy = "user")
+    private Set<GroupHasUser> users = new HashSet<>();
 }

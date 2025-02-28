@@ -7,9 +7,9 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "Address")
+@Entity
 @Table(name = "tbl_address")
-public class Address extends AbstractEntity {
+public class Address extends AbstractEntity<Long> {
     @Column(name = "apartment_number")
     private String apartmentNumber;
 
