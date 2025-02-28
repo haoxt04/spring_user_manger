@@ -8,7 +8,7 @@ import vn.edu.hcmuaf.fit.demohello.utils.Platform;
 import java.io.Serializable;
 
 @Getter
-public class SigInRequest implements Serializable {
+public class SignInRequest implements Serializable {
 
     @NotBlank(message = "username must be not blank")
     private String username;
