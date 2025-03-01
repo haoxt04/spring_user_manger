@@ -3,7 +3,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -27,7 +26,7 @@ import vn.edu.hcmuaf.fit.demohello.service.UserService;
 public class AppConfig {
     private final UserService userService;
     private final PreFilter preFilter;
-    private String[] WHITE_LIST = {"/auth/**"};
+    private static final String[] WHITE_LIST = {"/auth/**"};
 
     // thiết lập CORS cho các domain sử dụng api backend
     @Bean
@@ -39,7 +38,7 @@ public class AppConfig {
                         .allowedOrigins("http://localhost:8080")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")  // alowed http method
                         .allowedHeaders("*")    // alowed request header
-                        .allowCredentials(false)
+                        .allowCredentials(true)
                         .maxAge(3600);
             }
         };
@@ -81,7 +80,7 @@ public class AppConfig {
     @Bean
     public AuthenticationProvider provider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService.userDetailService());
+        provider.setUserDetailsService(userService.userDetailsService());
         provider.setPasswordEncoder(getPasswordEncoder());
 
         return provider;

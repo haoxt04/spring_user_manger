@@ -43,8 +43,13 @@ public class UserServiceImpl implements UserService {
     private final SearchRepository searchRepository;
 
     @Override
-    public UserDetailsService userDetailService() {
-        return username -> userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user not found"));
+    public UserDetailsService userDetailsService() {
+        return username -> userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    @Override
+    public User getByUsername(String userName) {
+        return userRepository.findByUsername(userName).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     @Override
@@ -245,6 +250,11 @@ public class UserServiceImpl implements UserService {
                 .totalPage(10)
                 .items(list)
                 .build();
+    }
+
+    @Override
+    public List<String> findAllRolesByUserId(long userId) {
+        return userRepository.findAllRolesByUserId(userId);
     }
 
 }
