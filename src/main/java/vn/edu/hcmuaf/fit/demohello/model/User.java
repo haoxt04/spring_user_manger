@@ -58,6 +58,10 @@ public class User extends AbstractEntity<Long> implements UserDetails, Serializa
     @Column(name = "status")
     private UserStatus status;
 
+    private Integer age;
+
+    private Boolean activated;
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     private Set<Address> addresses = new HashSet<>();

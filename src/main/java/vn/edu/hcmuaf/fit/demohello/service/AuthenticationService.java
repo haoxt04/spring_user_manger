@@ -60,12 +60,16 @@ public class AuthenticationService {
     public TokenResponse refreshToken(HttpServletRequest request) {
         log.info("---------- refreshToken ----------");
 
+        // kiểm tra token có được truyền vào không
         final String refreshToken = request.getHeader(REFERER);
         if (StringUtils.isBlank(refreshToken)) {
             throw new InvalidDataException("Token must be not blank");
         }
+        // giải nén token để lấy thông tin user rồi đối chiếu trong db
         final String userName = jwtService.extractUsername(refreshToken, REFRESH_TOKEN);
         var user = userService.getByUsername(userName);
+
+        // valid token
         if (!jwtService.isValid(refreshToken, REFRESH_TOKEN, user)) {
             throw new InvalidDataException("Not allow access with this token");
         }
