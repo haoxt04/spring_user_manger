@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 # spring_user_manger
 =======
 # hello-spring
->>>>>>> ab49aca (Initial commit)
+
 >
 ## Technical Stacks:
 - Java 17
